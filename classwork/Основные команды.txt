@@ -1,0 +1,21 @@
+task001:
+ip netns add testns
+ip netns list
+
+Выполняем команды в исходном пространстве:
+ip link add veth0 type veth peer name veth1(add заменяем на del без type...(удаляем )
+ip link set veth1 netns testns123
+ip a
+ip addr add 10.0.0.1/24 dev veth0
+ip link set dev veth0 up
+ip a
+
+В новом пространстве:
+ip addr add 10.0.0.2/24 dev veth1
+ip link set dev veth1 up
+
+ping 10.0.0.1
+
+ping 10.0.0.2
+
+task002:
